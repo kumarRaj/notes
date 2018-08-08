@@ -1,20 +1,30 @@
 package com.wander.model;
 
+import static java.util.Objects.isNull;
+
 import java.util.Date;
 
-import static java.util.Objects.isNull;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 
 
 /**
  * Copyright 2018 Jubilant FoodWorks Limited . All Rights Reserved.
  * Jubilant FoodWorks PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  */
-
+@Entity
 public class Note {
 
     public Note() {
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
     private String title;
     private String description;
     private Date createdTime;
@@ -49,5 +59,16 @@ public class Note {
         if (!isNull(note.description)){
             this.description = note.description;
         }
+    }
+    
+    @PrePersist
+    protected void onCreate() {
+        createdTime = new Date();
+        updatedTime = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+    	updatedTime = new Date();
     }
 }

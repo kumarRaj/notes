@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * Copyright 2018 Jubilant FoodWorks Limited . All Rights Reserved.
- * Jubilant FoodWorks PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
+
 
 @RestController
 public class NoteController {
