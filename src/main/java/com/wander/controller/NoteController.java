@@ -16,6 +16,7 @@ public class NoteController {
     @Autowired
     private NoteService noteService;
 
+    
     @PostMapping(value = "/notes")
     public Note create(@RequestBody Note note){
         return noteService.save(note);

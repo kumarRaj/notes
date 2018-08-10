@@ -31,7 +31,8 @@ dependencies {
 
     // Use MySQL Connector-J
     compile ('mysql:mysql-connector-java')
-    compile ('org.springframework.security:spring-security-web:5.0.7.RELEASE')
-	compile ('org.springframework.security:spring-security-config:5.0.7.RELEASE')
+    //testCompile("org.springframework.security:spring-security-test")
+    compile("org.springframework.boot:spring-boot-starter-security")
+    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
