@@ -8,6 +8,6 @@ import com.wander.model.WanderUser;
 @Repository
 public interface UserRepository extends CrudRepository<WanderUser, Integer> {
 	
-	//public User findByEmailid();
+	WanderUser findByEmailid(String username);
 }
 

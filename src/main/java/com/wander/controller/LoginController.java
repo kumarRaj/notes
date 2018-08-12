@@ -39,10 +39,12 @@ public class LoginController {
 	}
 
 	@PostMapping(value = "/registration-Form")
-	public String registerUser(@ModelAttribute("registrationForm") WanderUser userForm, Model note, @RequestParam String action) {
+	public String registerUser(@ModelAttribute("registrationForm") WanderUser wanderUser, Model note, @RequestParam String action) {
+		System.out.println("I an in registration");
 		if(action.equalsIgnoreCase("cancel"))
-			return "loginpage.html";
-		userservice.save(userForm);
+			return "redirect:/LoginPage";
+		wanderUser.setUserName(wanderUser.getEmailid());
+		userservice.save(wanderUser);
 		noteservice.getAllNotes();
 		WanderUser user = new WanderUser();
 		user.setNotes(noteservice.getAllNotes());
