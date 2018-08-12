@@ -43,13 +43,8 @@ public class LoginController {
 		System.out.println("I an in registration");
 		if(action.equalsIgnoreCase("cancel"))
 			return "redirect:/LoginPage";
-		wanderUser.setUserName(wanderUser.getEmailid());
 		userservice.save(wanderUser);
-		noteservice.getAllNotes();
-		WanderUser user = new WanderUser();
-		user.setNotes(noteservice.getAllNotes());
-		note.addAttribute("noteList", user);
-		return "display.html";
+		return "redirect:/LoginPage";
 	}
 	
 	@RequestMapping(value = "/add")

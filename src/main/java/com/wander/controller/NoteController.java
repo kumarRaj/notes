@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.wander.model.Note;
-import com.wander.model.Person;
 import com.wander.model.WanderUser;
 import com.wander.service.NoteService;
 
@@ -52,7 +51,7 @@ public class NoteController {
     }
 
     @GetMapping(value = "/person")
-    public Person getPerson(){
-        return new Person("Sunandan");
+    public String getPerson(){
+        return "Sunandan";
     }
 }

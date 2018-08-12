@@ -28,10 +28,8 @@ public class NoteService {
     }
 
     public List<Note> getAllNotes() {
-    	
-    	UserDetails user = (UserDetails)(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-	    System.out.println(user.getUsername());
-		
+        String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+
 		return (List<Note>) noteRepository.findAll();
     }
 

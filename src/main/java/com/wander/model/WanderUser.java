@@ -35,7 +35,6 @@ public class WanderUser {
     @NotEmpty
     private String password;
 
-    @Column(unique = true)
     private String role;
 
     @JoinColumn
@@ -88,6 +87,9 @@ public class WanderUser {
 
     public String getRole() {
         return this.role;
+    }
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getUserName() {
