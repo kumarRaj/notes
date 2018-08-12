@@ -95,10 +95,9 @@ span.psw {
             You have been logged out.
    </div>
 <form th:action="@{/login}" method="post">
-
   <div class="container">
     <label for="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="username" required>
+    <input type="text" placeholder="Your email id is your Username" name="username" required>
 
     <label for="psw"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="password" required>
@@ -110,7 +109,7 @@ span.psw {
     <button type="button" class="cancelbtn">Cancel</button>
     <span class="psw">Forgot <a href="#">password?</a></span>
   </div>
-</th:form>
+</form>
 
 </body>
 </html>

@@ -3,9 +3,11 @@ package com.wander.repository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.wander.model.Note;
+import com.wander.model.User;
 
 @Repository
-public interface NotesRepository extends CrudRepository<Note, Integer> {
+public interface UserRepository extends CrudRepository<User, Integer> {
 	
+	//public User findByEmailid();
 }
+

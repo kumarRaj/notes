@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<th:form th:action="@{/hello}" modelAttribute="noteList" method="post">
+	
+	<table>
+		<thead>
+			<tr>
+				<td>Title</td>
+				<td>Description</td>
+			</tr>
+			<tr th:each="note : ${noteList.notes}">
+				<td  th:text="${note.title}"></td>
+				<td  th:text="${note.description}"></td>
+			</tr>
+		</thead>
+	</table>
+	<input type="Submit" value = "Sumit" />
+</th:form>
+
+</body>
+</html>

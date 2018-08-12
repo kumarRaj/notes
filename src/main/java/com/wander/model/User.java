@@ -1,16 +1,21 @@
 package com.wander.model;
 
+import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @SequenceGenerator(name="seq", initialValue=100, allocationSize=200)
-public class Registration {
+public class User {
 
 	@NotNull
 	@NotEmpty
@@ -22,13 +27,30 @@ public class Registration {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
-	@NotNull
-	@NotEmpty
-	private String userid;
+	private Integer userid;
 	
+	
+	@NotNull
+	@Column(unique = true)
+	private String  emailid;
+	
+
 	@NotNull
 	@NotEmpty
 	private String password;
+	
+	
+	@JoinColumn
+	@OneToMany
+	private List<Note> notes;
+
+	public List<Note> getNotes() {
+		return notes;
+	}
+
+	public void setNotes(List<Note> notes) {
+		this.notes = notes;
+	}
 
 	public String getFirstName() {
 		return firstName;
@@ -46,12 +68,20 @@ public class Registration {
 		LastName = lastName;
 	}
 
-	public String getUserid() {
+	public Integer getUserid() {
 		return userid;
 	}
 
-	public void setUserid(String userid) {
+	public void setUserid(Integer userid) {
 		this.userid = userid;
+	}
+	
+	public String getEmailid() {
+		return emailid;
+	}
+
+	public void setEmailid(String emailid) {
+		this.emailid = emailid;
 	}
 
 	public String getPassword() {

@@ -18,7 +18,9 @@ public class NoteController {
 
     
     @PostMapping(value = "/notes")
-    public Note create(@RequestBody Note note){
+    public Note create(@ModelAttribute("addNote") Note note){
+    	
+    	System.out.println("Raj Kumar1"+note.getDescription());
         return noteService.save(note);
     }
 
