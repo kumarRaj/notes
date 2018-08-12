@@ -3,6 +3,8 @@ package com.wander.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.wander.model.WanderUser;
+import com.wander.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,6 +24,10 @@ public class NoteService {
     @Autowired
     private NotesRepository noteRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
+
     public Note save(Note note) {
     	noteRepository.save(note);
         return note;
@@ -29,8 +35,8 @@ public class NoteService {
 
     public List<Note> getAllNotes() {
         String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
-
-		return (List<Note>) noteRepository.findAll();
+        WanderUser user = userRepository.findByEmailid(username);
+        return user.getNotes();
     }
 
     public Note delete(Integer id) {

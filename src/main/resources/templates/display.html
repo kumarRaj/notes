@@ -29,21 +29,22 @@ table#t01 th {
 }
 </style>
 <body>
-<form th:action="@{/hello}" modelAttribute="noteList" method="post">
+<form th:action="@{/addnote}" modelAttribute="notes" method="post">
 	<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-	<input type="Submit" value = "Back" />
+	<button type="Submit" name = "action" value = "back" >Back</button>
 	<table id="t01">
 		<thead>
 			<tr>
 				<th>Title</th>
 				<th>Description</th>
 			</tr>
-			<tr th:each="note : ${noteList.notes}">
+			<tr th:each="note : ${notes}">
 				<td  th:text="${note.title}"></td>
 				<td  th:text="${note.description}"></td>
 			</tr>
 		</thead>
 	</table>
+	<button type="Submit" name = "action" value = "add" >Add</button>
 </form>
 
 </body>

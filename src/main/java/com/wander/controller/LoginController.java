@@ -39,27 +39,11 @@ public class LoginController {
 	}
 
 	@PostMapping(value = "/registration-Form")
-	public String registerUser(@ModelAttribute("registrationForm") WanderUser wanderUser, Model note, @RequestParam String action) {
+	public String registerUser(@ModelAttribute("registrationForm") WanderUser wanderUser,  @RequestParam String action) {
 		System.out.println("I an in registration");
 		if(action.equalsIgnoreCase("cancel"))
 			return "redirect:/LoginPage";
 		userservice.save(wanderUser);
 		return "redirect:/LoginPage";
 	}
-	
-	@RequestMapping(value = "/add")
-	public String addNote(Model addNote) {
-		Note note = new Note();
-		addNote.addAttribute("displaynote", note);
-		return "addNote.html";
-	}
-
-	@RequestMapping(value = "/noteadd")
-	public String noteadd(@ModelAttribute("displaynote") Note note){
-    	
-    	System.out.println("Raj Kumar"+ note.getDescription());
-        noteservice.save(note);
-        return "hello.html";
-	}
-	
 }
