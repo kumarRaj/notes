@@ -27,3 +27,4 @@ bin
 /nbdist/
 /.nb-gradle/
 /.metadata/
+src/main/resources/application.properties
