@@ -40,7 +40,15 @@ public class Note {
         return title;
     }
 
-    public String getDescription() {
+    public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getDescription() {
         return description;
     }
 

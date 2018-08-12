@@ -1,5 +1,6 @@
 package com.wander.model;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -13,9 +14,12 @@ import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+
 @Entity
 @SequenceGenerator(name="seq", initialValue=100, allocationSize=200)
-public class User {
+public class WanderUser {
 
 	@NotNull
 	@NotEmpty

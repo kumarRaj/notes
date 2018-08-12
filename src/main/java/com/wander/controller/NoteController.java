@@ -1,16 +1,24 @@
 package com.wander.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import com.wander.model.Note;
 import com.wander.model.Person;
+import com.wander.model.WanderUser;
 import com.wander.service.NoteService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 
-@RestController
+@Controller
 public class NoteController {
 
     @Autowired
@@ -21,6 +29,7 @@ public class NoteController {
     public Note create(@ModelAttribute("addNote") Note note){
     	
     	System.out.println("Raj Kumar1"+note.getDescription());
+    	System.out.println("Raj Kumar1"+note.getTitle());
         return noteService.save(note);
     }
 
@@ -30,8 +39,11 @@ public class NoteController {
     }
 
     @GetMapping(value = "/notes")
-    public List<Note> getNote(){
-        return noteService.getAllNotes();
+    public String getNote(Model note){
+    	WanderUser user = new WanderUser();
+		user.setNotes(noteService.getAllNotes());
+		note.addAttribute("noteList", user);
+		return "display.html";
     }
 
     @DeleteMapping(value = "/notes/{id}")

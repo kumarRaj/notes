@@ -5,14 +5,38 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
+<style>
+table {
+    width:100%;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 15px;
+    text-align: left;
+}
+table#t01 tr:nth-child(even) {
+    background-color: #eee;
+}
+table#t01 tr:nth-child(odd) {
+   background-color: #fff;
+}
+table#t01 th {
+    background-color: green;
+    color: white;
+}
+</style>
 <body>
-<th:form th:action="@{/hello}" modelAttribute="noteList" method="post">
-	
-	<table>
+<form th:action="@{/hello}" modelAttribute="noteList" method="post">
+	<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+	<input type="Submit" value = "Back" />
+	<table id="t01">
 		<thead>
 			<tr>
-				<td>Title</td>
-				<td>Description</td>
+				<th>Title</th>
+				<th>Description</th>
 			</tr>
 			<tr th:each="note : ${noteList.notes}">
 				<td  th:text="${note.title}"></td>
@@ -20,8 +44,7 @@
 			</tr>
 		</thead>
 	</table>
-	<input type="Submit" value = "Sumit" />
-</th:form>
+</form>
 
 </body>
 </html>

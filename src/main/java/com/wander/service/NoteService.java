@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.wander.model.Note;
@@ -26,7 +28,11 @@ public class NoteService {
     }
 
     public List<Note> getAllNotes() {
-        return (List<Note>) noteRepository.findAll();
+    	
+    	UserDetails user = (UserDetails)(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+	    System.out.println(user.getUsername());
+		
+		return (List<Note>) noteRepository.findAll();
     }
 
     public Note delete(Integer id) {
