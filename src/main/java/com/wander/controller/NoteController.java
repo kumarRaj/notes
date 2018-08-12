@@ -33,7 +33,7 @@ public class NoteController {
 
     @GetMapping(value = "/notes")
     public String getNote(Model note){
-		note.addAttribute("notes", noteService.getAllNotes());
+        note.addAttribute("notes", noteService.getAllNotes());
 		return "display.html";
     }
 
@@ -60,7 +60,7 @@ public class NoteController {
 
         System.out.println("Raj Kumar"+ note.getDescription());
         noteService.save(note);
-        return "hello.html";
+        return "redirect:/notes";
     }
 
 }

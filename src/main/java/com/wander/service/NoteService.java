@@ -29,7 +29,11 @@ public class NoteService {
 
 
     public Note save(Note note) {
-    	noteRepository.save(note);
+        String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        WanderUser user = userRepository.findByEmailid(username);
+        Note savedNote = noteRepository.save(note);
+        user.getNotes().add(savedNote);
+    	userRepository.save(user);
         return note;
     }
 
