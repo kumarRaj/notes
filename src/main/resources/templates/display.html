@@ -57,10 +57,9 @@ table#t01 th {
 				<tr th:each="note : ${notes}">
 					<td th:text="${note.title}"></td>
 					<td th:text="${note.description}"></td>
-					<!-- <td  th:text="${note.createdTime}"></td> -->
 					<td th:text="${#dates.format(note.createdTime, 'dd-MMM-yyyy')}"></td>
 					<td th:text="${#dates.format(note.updatedTime, 'dd-MMM-yyyy')}"></td>
-					<!-- <td  th:text="${note.updatedTime}"></td> -->
+
 				</tr>
 			</thead>
 		</table>

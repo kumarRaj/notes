@@ -80,24 +80,22 @@ span.psw {
 		<div th:if="${param.userPresent}">User already exists. Please
 			login with the same email id.</div>
 		<div th:if="${param.error}">Invalid username and password.</div>
-		<div th:if="${param.logout}">
-			You have been logged out.
-			<form th:action="@{/authenticateTheUser}" method="post">
+		<div th:if="${param.logout}">You have been logged out.</div>
+		<form th:action="@{/authenticateTheUser}" method="post">
 
-				<label for="uname"><b>Username</b></label> <input type="text"
-					placeholder="Your email id is your Username" name="username"
-					required> <label for="psw"><b>Password</b></label> <input
-					type="password" placeholder="Enter Password" name="password"
-					required>
+			<label for="uname"><b>Username</b></label> <input type="text"
+				placeholder="Your email id is your Username" name="username"
+				required> <label for="psw"><b>Password</b></label> <input
+				type="password" placeholder="Enter Password" name="password"
+				required>
 
-				<button type="submit" name="action" value="login">Login</button>
-			</form>
-			<form th:action="@{/registration}" method="post">
-				<button type="submit" onclick="th:href='@{/registration}'">Sign
-					Up</button>
-			</form>
+			<button type="submit" name="action" value="login">Login</button>
+		</form>
+		<form th:action="@{/registration}" method="post">
+			<button type="submit" onclick="th:href='@{/registration}'">Sign
+				Up</button>
+		</form>
 
-		</div>
 	</div>
 </body>
 </html>

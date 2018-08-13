@@ -38,8 +38,10 @@ public class NoteController {
     }
 
     @DeleteMapping(value = "/notes/{id}")
-    public void deleteNote(@PathVariable(value = "id") Integer id){
+    public String deleteNote(@PathVariable(value = "id") Integer id){
+    	System.out.println("Delete function");
         noteService.delete(id);
+        return "redirect:/notes";
     }
 
     @GetMapping(value = "/person")
