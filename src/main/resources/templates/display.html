@@ -1,51 +1,73 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <style>
 table {
-    width:100%;
+	width: 100%;
 }
+
 table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
+	border: 1px solid black;
+	border-collapse: collapse;
 }
+
 th, td {
-    padding: 15px;
-    text-align: left;
+	padding: 15px;
+	text-align: left;
 }
+
 table#t01 tr:nth-child(even) {
-    background-color: #eee;
+	background-color: #eee;
 }
+
 table#t01 tr:nth-child(odd) {
-   background-color: #fff;
+	background-color: #fff;
 }
+
 table#t01 th {
-    background-color: green;
-    color: white;
+	background-color: green;
+	color: white;
 }
 </style>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <body>
-<form th:action="@{/addnote}" modelAttribute="notes" method="post">
-	<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-	<button type="Submit" name = "action" value = "back" >Back</button>
-	<table id="t01">
-		<thead>
-			<tr>
-				<th>Title</th>
-				<th>Description</th>
-			</tr>
-			<tr th:each="note : ${notes}">
-				<td  th:text="${note.title}"></td>
-				<td  th:text="${note.description}"></td>
-			</tr>
-		</thead>
-	</table>
-	<button type="Submit" name = "action" value = "add" >Add</button>
-</form>
+	<form th:action="@{/addnote}" modelAttribute="notes" method="post">
+		<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+		<div class="container">
+		<button type="Submit" class="btn btn-success" name="action" value="back">Back</button>
+		<br/>
+		<table id="t01" class="table">
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Description</th>
+					<th>Created Date</th>
+					<th>Updated Time</th>
+				</tr>
+				<tr th:each="note : ${notes}">
+					<td th:text="${note.title}"></td>
+					<td th:text="${note.description}"></td>
+					<!-- <td  th:text="${note.createdTime}"></td> -->
+					<td th:text="${#dates.format(note.createdTime, 'dd-MMM-yyyy')}"></td>
+					<td th:text="${#dates.format(note.updatedTime, 'dd-MMM-yyyy')}"></td>
+					<!-- <td  th:text="${note.updatedTime}"></td> -->
+				</tr>
+			</thead>
+		</table>
+	
+		<button type="Submit" class="btn btn-success" name="action" value="add">Add</button>
+		</div>
+	</form>
 
 </body>
 </html>
