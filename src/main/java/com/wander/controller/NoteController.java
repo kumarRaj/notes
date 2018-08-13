@@ -38,8 +38,8 @@ public class NoteController {
     }
 
     @DeleteMapping(value = "/notes/{id}")
-    public Note deleteNote(@PathVariable(value = "id") Integer id){
-        return noteService.delete(id);
+    public void deleteNote(@PathVariable(value = "id") Integer id){
+        noteService.delete(id);
     }
 
     @GetMapping(value = "/person")

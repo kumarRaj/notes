@@ -14,20 +14,31 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 
+import static java.util.Objects.isNull;
+
 @Service
 public class UserService implements UserDetailsService {
 
-    @Autowired
-    PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
+
+    private final UserRepository userRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository) {
+        this.passwordEncoder = passwordEncoder;
+        this.userRepository = userRepository;
+    }
 
-    public void save(WanderUser user) {
-        user.setUserName(user.getEmailid());
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole("USER");
-        userRepository.save(user);
+    public String save(WanderUser user) {
+        WanderUser userExists = userRepository.findByEmailid(user.getEmailid());
+        if(isNull(userExists)){
+            user.setUserName(user.getEmailid());
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setRole("USER");
+            userRepository.save(user);
+            return "redirect:/LoginPage";
+        }
+        return "redirect:/LoginPage?userPresent";
     }
 
     @Override

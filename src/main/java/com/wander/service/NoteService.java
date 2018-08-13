@@ -2,6 +2,7 @@ package com.wander.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.wander.model.WanderUser;
 import com.wander.repository.UserRepository;
@@ -17,15 +18,14 @@ import com.wander.repository.NotesRepository;
 
 @Service
 public class NoteService {
-    private List<Note> notes = new ArrayList<>();
-    
-    
-    
-    @Autowired
-    private NotesRepository noteRepository;
+    private final NotesRepository noteRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    public NoteService(NotesRepository noteRepository, UserRepository userRepository) {
+        this.noteRepository = noteRepository;
+        this.userRepository = userRepository;
+    }
 
 
     public Note save(Note note) {
@@ -43,10 +43,8 @@ public class NoteService {
         return user.getNotes();
     }
 
-    public Note delete(Integer id) {
-        Note note = notes.get(id);
+    public void delete(Integer id) {
         noteRepository.deleteById(id);
-        return note;
     }
 
     public Note update(Integer id, Note note) {

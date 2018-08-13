@@ -40,10 +40,8 @@ public class LoginController {
 
 	@PostMapping(value = "/registration-Form")
 	public String registerUser(@ModelAttribute("registrationForm") WanderUser wanderUser,  @RequestParam String action) {
-		System.out.println("I an in registration");
 		if(action.equalsIgnoreCase("cancel"))
 			return "redirect:/LoginPage";
-		userservice.save(wanderUser);
-		return "redirect:/LoginPage";
+		return userservice.save(wanderUser);
 	}
 }

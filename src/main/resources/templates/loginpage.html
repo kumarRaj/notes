@@ -66,7 +66,10 @@ span.psw {
 <body>
 
 <h2>Login Form</h2>
-<div th:if="${param.error}">
+        <div th:if="${param.userPresent}">
+            User already exists. Please login with the same email id.
+        </div>
+        <div th:if="${param.error}">
             Invalid username and password.
         </div>
         <div th:if="${param.logout}">
