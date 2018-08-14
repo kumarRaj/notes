@@ -33,6 +33,11 @@ table#t01 th {
 	background-color: green;
 	color: white;
 }
+.signout{
+	float: right;
+	color: #2f2f2f;
+	margin: 8px;
+}
 </style>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -41,30 +46,47 @@ table#t01 th {
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <body>
-	<form th:action="@{/addnote}" modelAttribute="notes" method="post">
-		<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-		<div class="container">
-		<button type="Submit" class="btn btn-success" name="action" value="back">Back</button>
+	
+	<form th:action="@{/logout}" method="post">
+	<nav class="navbar navbar-default">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse"
+						data-target="#myNavbar"></button>
+					<a class="navbar-brand" href="#">Hello
+						[[${#httpServletRequest.remoteUser}]]!</a>
+				</div>
+				<div class="collapse navbar-collapse" id="myNavbar">
+					<div class="signout">
+						<button type="submit" value="Sign Out" class="btn">LogOut</button>
+					</div>
+				</div>
+			</div>
+		</nav>
+		</form>
+		<form th:action="@{/addnote}" modelAttribute="notes" method="post">
+		<div class="container-fluid bg-1 text-center">
+		
 		<br/>
 		<table id="t01" class="table">
 			<thead>
 				<tr>
-					<th>Title</th>
-					<th>Description</th>
-					<th>Created Date</th>
-					<th>Updated Time</th>
+					<th class="col-md-2">Topic</th>
+					<th class="col-md-6">Message</th>
+					<th class="col-md-2">Created At</th>
+					<th class="col-md-2">Updated At</th>
 				</tr>
 				<tr th:each="note : ${notes}">
-					<td th:text="${note.title}"></td>
-					<td th:text="${note.description}"></td>
-					<td th:text="${#dates.format(note.createdTime, 'dd-MMM-yyyy')}"></td>
-					<td th:text="${#dates.format(note.updatedTime, 'dd-MMM-yyyy')}"></td>
+					<td th:text="${note.title}" class="col-md-2"></td>
+					<td th:text="${note.description}" class="col-md-6"></td>
+					<td th:text="${#dates.format(note.createdTime, 'dd-MMM-yyyy')}" class="col-md-2"></td>
+					<td th:text="${#dates.format(note.updatedTime, 'dd-MMM-yyyy')}" class="col-md-2"></td>
 
 				</tr>
 			</thead>
 		</table>
-	
-		<button type="Submit" class="btn btn-success" name="action" value="add">Add</button>
+		<button type="Submit" style="margin: 25px;" class="btn btn-success" name="action" value="back">Back</button>
+		<button type="Submit" style="margin: 25px;" class="btn btn-success" name="action" value="add">Add</button>
 		</div>
 	</form>
 
