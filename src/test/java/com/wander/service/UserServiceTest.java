@@ -7,9 +7,15 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.Collection;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -70,5 +76,54 @@ public class UserServiceTest {
         assertEquals("password", userDetails.getPassword());
         SimpleGrantedAuthority authority = (SimpleGrantedAuthority) userDetails.getAuthorities().toArray()[0];
         assertEquals("USER", authority.getAuthority());
+    }
+
+    @Test
+    public void shouldGetCurrentUser(){
+        WanderUser user = new WanderUser();
+        Authentication auth = new UsernamePasswordAuthenticationToken(new MyUserDetails(),null);
+        SecurityContextHolder.getContext().setAuthentication(auth);
+        when(userRepository.findByEmailid("raj")).thenReturn(user);
+
+        WanderUser currentUser = userService.getCurrentUser();
+
+        assertEquals(user, currentUser);
+    }
+
+    private class MyUserDetails implements UserDetails {
+        @Override
+        public Collection<? extends GrantedAuthority> getAuthorities() {
+            return null;
+        }
+
+        @Override
+        public String getPassword() {
+            return null;
+        }
+
+        @Override
+        public String getUsername() {
+            return "raj";
+        }
+
+        @Override
+        public boolean isAccountNonExpired() {
+            return false;
+        }
+
+        @Override
+        public boolean isAccountNonLocked() {
+            return false;
+        }
+
+        @Override
+        public boolean isCredentialsNonExpired() {
+            return false;
+        }
+
+        @Override
+        public boolean isEnabled() {
+            return false;
+        }
     }
 }
