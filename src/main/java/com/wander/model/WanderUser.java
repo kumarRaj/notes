@@ -38,7 +38,7 @@ public class WanderUser {
     private String role;
 
     @JoinColumn
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Note> notes;
 
     public List<Note> getNotes() {

@@ -19,10 +19,6 @@ public class LoginController {
 	@Autowired
 	private UserService userservice;
 
-	@Autowired
-	private NoteService noteservice;
-
-
 	@RequestMapping(value = "/LoginPage")
 	public String loginPage() {
 		return "loginpage.html";

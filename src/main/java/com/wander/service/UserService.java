@@ -5,6 +5,7 @@ import com.wander.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -47,5 +48,10 @@ public class UserService implements UserDetailsService {
         GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole());
         return new User(user.getUserName(),
                 user.getPassword(), Collections.singletonList(authority));
+    }
+
+    public WanderUser getCurrentUser(){
+        String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        return userRepository.findByEmailid(username);
     }
 }

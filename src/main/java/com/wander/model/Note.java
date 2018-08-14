@@ -4,13 +4,7 @@ import static java.util.Objects.isNull;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
+import javax.persistence.*;
 
 
 /**
@@ -30,7 +24,7 @@ public class Note {
     private String description;
     private Date createdTime;
     private Date updatedTime;
- 
+
     public Note(String title, String description) {
         this.description = description;
         this.title = title;

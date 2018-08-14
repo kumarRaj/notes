@@ -21,8 +21,6 @@ public class NoteController {
     @PostMapping(value = "/notes")
     public Note create(@ModelAttribute("addNote") Note note){
     	
-    	System.out.println("Raj Kumar1"+note.getDescription());
-    	System.out.println("Raj Kumar1"+note.getTitle());
         return noteService.save(note);
     }
 
@@ -60,7 +58,6 @@ public class NoteController {
     @RequestMapping(value = "/displayHome")
     public String displayHome(@ModelAttribute("note") Note note){
 
-        System.out.println("Raj Kumar"+ note.getDescription());
         noteService.save(note);
         return "redirect:/notes";
     }

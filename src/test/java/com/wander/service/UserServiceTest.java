@@ -24,7 +24,7 @@ public class UserServiceTest {
     private UserRepository userRepository;
 
     @InjectMocks
-    UserService userService;
+    private UserService userService;
 
     @Test
     public void shouldSaveUserIfNotAlreadyPresent() {

@@ -1,45 +1,39 @@
 package com.wander.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
+import com.wander.model.Note;
 import com.wander.model.WanderUser;
+import com.wander.repository.NotesRepository;
 import com.wander.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import com.wander.model.Note;
-import com.wander.repository.NotesRepository;
-
+import java.util.List;
 
 
 @Service
 public class NoteService {
     private final NotesRepository noteRepository;
-    private final UserRepository userRepository;
+    private UserService userService;
 
     @Autowired
-    public NoteService(NotesRepository noteRepository, UserRepository userRepository) {
+    public NoteService(NotesRepository noteRepository, UserService userService) {
         this.noteRepository = noteRepository;
-        this.userRepository = userRepository;
+        this.userService = userService;
     }
 
 
     public Note save(Note note) {
-        String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
-        WanderUser user = userRepository.findByEmailid(username);
+        WanderUser user = userService.getCurrentUser();
         Note savedNote = noteRepository.save(note);
         user.getNotes().add(savedNote);
-    	userRepository.save(user);
+//    	userRepository.save(user);
         return note;
     }
 
     public List<Note> getAllNotes() {
-        String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
-        WanderUser user = userRepository.findByEmailid(username);
+        WanderUser user = userService.getCurrentUser();
         return user.getNotes();
     }
 
