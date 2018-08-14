@@ -5,8 +5,6 @@ import com.wander.model.WanderUser;
 import com.wander.repository.NotesRepository;
 import com.wander.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,13 +12,15 @@ import java.util.List;
 
 @Service
 public class NoteService {
-    private final NotesRepository noteRepository;
+    private NotesRepository noteRepository;
     private UserService userService;
+    private UserRepository userRepository;
 
     @Autowired
-    public NoteService(NotesRepository noteRepository, UserService userService) {
+    public NoteService(NotesRepository noteRepository, UserService userService, UserRepository userRepository) {
         this.noteRepository = noteRepository;
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
 
@@ -28,7 +28,7 @@ public class NoteService {
         WanderUser user = userService.getCurrentUser();
         Note savedNote = noteRepository.save(note);
         user.getNotes().add(savedNote);
-//    	userRepository.save(user);
+    	userRepository.save(user);
         return note;
     }
 

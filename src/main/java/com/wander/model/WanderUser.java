@@ -3,6 +3,7 @@ package com.wander.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -39,7 +40,7 @@ public class WanderUser {
 
     @JoinColumn
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Note> notes;
+    private List<Note> notes = new ArrayList<>();
 
     public List<Note> getNotes() {
         return notes;
