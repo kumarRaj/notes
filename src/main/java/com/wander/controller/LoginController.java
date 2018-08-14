@@ -1,5 +1,7 @@
 package com.wander.controller;
 
+import com.wander.model.WanderUser;
+import com.wander.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,16 +10,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.wander.model.Note;
-import com.wander.model.WanderUser;
-import com.wander.service.NoteService;
-import com.wander.service.UserService;
-
 @Controller
 public class LoginController {
 
+	private final UserService userservice;
+
 	@Autowired
-	private UserService userservice;
+	public LoginController(UserService userservice) {
+		this.userservice = userservice;
+	}
 
 	@RequestMapping(value = "/LoginPage")
 	public String loginPage() {
@@ -27,7 +28,7 @@ public class LoginController {
 	
 	
 	@RequestMapping(value = "/registration")
-	public String Registation(Model registrationForm) {
+	public String Registration(Model registrationForm) {
 		WanderUser r = new WanderUser();
 		r.setFirstName("abcdef");
 		registrationForm.addAttribute("registrationForm", r);

@@ -1,13 +1,11 @@
 package com.wander.controller;
 
+import com.wander.model.Note;
+import com.wander.service.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import com.wander.model.Note;
-import com.wander.model.WanderUser;
-import com.wander.service.NoteService;
 
 
 
